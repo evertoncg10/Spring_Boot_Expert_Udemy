@@ -2,10 +2,7 @@ package br.com.cezartech.produtosapi.controller;
 
 import br.com.cezartech.produtosapi.model.Produto;
 import br.com.cezartech.produtosapi.repository.ProdutoRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -26,5 +23,10 @@ public class ProdutoController {
         produto.setId(id);
         produtoRepository.save(produto);
         return produto;
+    }
+
+    @GetMapping("/{id}")
+    public Produto obterPorId(@PathVariable("id") String id) {
+        return produtoRepository.findById(id).orElse(null);
     }
 }
